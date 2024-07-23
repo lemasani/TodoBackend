@@ -1,5 +1,6 @@
 const {User, validateUser} = require('../model/userModel');
 const bcrypt = require('bcrypt'); 
+const jwt = require('jsonwebtoken');
 
 
 exports.registerUser = async (req, res) => {
@@ -34,8 +35,12 @@ exports.loginUser =  async (req, res) => {
         if (!user || !await bcrypt.compare(password, user.password)) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
-        // Implement JWT token generation or session creation here
-        res.status(200).json({ message: 'User logged in successfully', user });
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '30m' });
+        res.status(200).json({ message: 'User logged in successfully', user:{
+            id: user.id,
+            username: user.username,
+            email: user.email
+        }, token });
     } catch (error) {
         res.status(500).json({ message: 'Error logging in', error: error.message });
     }
