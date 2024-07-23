@@ -1,15 +1,13 @@
 const express = require('express');
 
 const router = express.Router();
+// Import middleware
+const { loginUser, registerUser } = require('../middleware/user.middleware');
 
 // User registration route
-router.post('/register', (req, res) => {
-    // Add your registration logic here
-});
+router.post('/', registerUser);
 
 // User login route
-router.post('/login', (req, res) => {
-    // Add your login logic here
-});
+router.post('/login', loginUser);
 
 module.exports = router;
