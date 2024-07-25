@@ -10,11 +10,12 @@ app.use(express.json());
 // Import routes
 const register = require('./routes/userRoutes');
 const login = require('./routes/userRoutes');
-
+const todo = require('./routes/todoRouter'); // Import todoRouter
 
 // Use routes   
 app.use('/api/register', register);
 app.use('/', login);
+app.use('/api/todos', todo); // Use todoRouter with the '/api/todos' prefix
 
 app.use(errorHandler)
 

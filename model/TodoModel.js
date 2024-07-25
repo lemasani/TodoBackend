@@ -31,3 +31,8 @@ const todoSchema = new mongoose.Schema({
     default: Date.now
   }
 });
+
+
+const Todo = mongoose.model('Todo', todoSchema);
+
+module.exports = Todo;
