@@ -29,13 +29,8 @@ const todoSchema = new mongoose.Schema({
   updatedAt: {
     type: Date,
     default: Date.now
-  },
-  deleted: {
-    type: Boolean,
-    default: false
   }
 });
-
 
 const Todo = mongoose.model('Todo', todoSchema);
 

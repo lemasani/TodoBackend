@@ -5,7 +5,7 @@ const { getTodos, postTodos, markTodo, deleteTodo } = require('../middleware/tod
 
 todo.get('/:id', verifyToken, getTodos);
 todo.post('/', verifyToken, postTodos);
-todo.put('/', verifyToken, markTodo);
+todo.put('/:id', verifyToken, markTodo);
 todo.delete('/:id', verifyToken, deleteTodo)
 
 module.exports = todo;
