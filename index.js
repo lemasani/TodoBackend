@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors'); // Import the cors package
+const cors = require('cors');
 require('dotenv').config();
 
 const errorHandler = require('./middleware/errorHandler');
@@ -10,7 +10,7 @@ app.use(express.json());
 
 // Configure CORS
 app.use(cors({
-    origin: process.env.ORIGN_URL, // Replace with your frontend URL
+    origin: process.env.ORIGN_URL, 
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Authorization,Content-Type'
 }));
@@ -18,12 +18,12 @@ app.use(cors({
 // Import routes
 const register = require('./routes/userRoutes');
 const login = require('./routes/userRoutes');
-const todo = require('./routes/todoRouter'); // Import todoRouter
+const todo = require('./routes/todoRouter');
 
 // Use routes   
 app.use('/api/register', register);
 app.use('/', login);
-app.use('/api/todos', todo); // Use todoRouter with the '/api/todos' prefix
+app.use('/api/todos', todo); 
 
 app.use(errorHandler);
 
@@ -33,7 +33,6 @@ const PORT = process.env.PORT || 5000;
 mongoose.connect(process.env.DATABASE_URL)
     .then(() => {
         console.log('Connected to MongoDB');
-        // Start listening only after MongoDB connection is successful
         app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
         });
