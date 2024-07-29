@@ -3,6 +3,9 @@ const Todo = require('../model/TodoModel');
 exports.getTodos = async (req, res) => {
 	try {
 		const todos = await Todo.find({ user: req.user._id });
+		if (todos.length === 0) {
+            return res.status(200).json({ message: 'No todos' });
+        }
 		res.json(todos);
 	} catch (error) {
 		res.status(500).json({ message: 'Error fetching todos', error: error.message });
