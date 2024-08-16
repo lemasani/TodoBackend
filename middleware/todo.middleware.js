@@ -41,6 +41,28 @@ exports.markTodo = async (req, res) => {
     }
 };
 
+exports.updateTodo = async (req, res) => {
+
+  const { id } = req.params;
+  const {id: _, ...updateData} = req.body;
+
+  try {
+    const updatedTodo = await Todo.findByIdAndUpdate(
+      id,
+      updateData.todoData,
+      { new: true }
+    );
+
+    if (!updatedTodo) {
+      return res.status(404).json({ message: 'Todo not found' });
+    }
+    return res.json(updatedTodo);
+  } catch (error) {
+    console.error('Error updating todo:', error);
+    res.status(500).json({ message: 'Error updating todo', error: error.message });
+  }
+};
+
 exports.deleteTodo = async (req, res) => {
     try {
       const { id } = req.params;
